@@ -17,4 +17,15 @@ public class PropertiesUtil {
         return prop.getProperty(key);
     }
 
+    public static void setValue(String key, String value){
+        Properties prop = new Properties();
+        InputStream in = new PropertiesUtil().getClass().getResourceAsStream("/zkem-info.properties");
+        try {
+            prop.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        prop.setProperty(key, value);
+    }
+
 }

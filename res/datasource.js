@@ -10,11 +10,10 @@ var ioc = {
             username: "root",
             password: "123456",
             initialSize: 5,
-            maxActive: 50,
+            maxActive: 10,
             maxIdle: 10,
-            defaultAutoCommit: false,
-            timeBetweenEvictionRunsMillis: 3600000,
-            minEvictableIdleTimeMillis: 3600000
+            defaultAutoCommit: true,
+            // validationQuery: "select 1 from dual "
         }
     },
     dao: {

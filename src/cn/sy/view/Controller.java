@@ -4,6 +4,7 @@ import cn.sy.model.ZkemConf;
 import cn.sy.util.IocUtils;
 import cn.sy.util.PropertiesUtil;
 import cn.sy.zkem.ZkemSDK;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,8 @@ import org.nutz.log.Logs;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Controller implements Initializable {
 
@@ -43,8 +46,11 @@ public class Controller implements Initializable {
 
     private ZkemSDK sdk = new ZkemSDK();
 
+    /**
+     * 连接考勤机
+     * @param event
+     */
     public void conn(ActionEvent event) {
-
         Dao dao = IocUtils.getConn();
         ZkemConf zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=", tfIp.getText())
                 .and("port", "=", tfPort.getText())
@@ -53,28 +59,40 @@ public class Controller implements Initializable {
             log.error("系统不存在该考勤机");
             return;
         }
-        ((Button) event.getSource()).setText("连接中...");
-        ((Button) event.getSource()).setDisable(true);
+        btnCon.setText("连接中...");
+        btnCon.setDisable(true);
         boolean connFlag = sdk.connect(zkem.getIpAddr(), zkem.getPort());
-        ((Button) event.getSource()).setText("连接");
-        ((Button) event.getSource()).setDisable(false);
+        btnCon.setText("连接");
+        btnCon.setDisable(false);
         if (connFlag) {
-            ((Button) event.getSource()).setVisible(false);
+            btnCon.setVisible(false);
             btnDisCon.setVisible(true);
             log.info("连接成功！");
             sdk.regEvent(zkem);
+            PropertiesUtil.setValue("zkem.ipAddt", tfIp.getText());
+            PropertiesUtil.setValue("zkem.port", tfPort.getText());
+            PropertiesUtil.setValue("zkem.number", tfNumber.getText());
         } else {
             log.error("连接失败！");
         }
-
     }
 
+    /**
+     * 断开考勤机连接
+     *
+     * @param event
+     */
     public void disConn(ActionEvent event) {
         sdk.disConnect();
         btnDisCon.setVisible(false);
         btnCon.setVisible(true);
     }
 
+    /**
+     * 注册考勤机需要的动态库
+     *
+     * @param event
+     */
     public void regService(ActionEvent event) {
         try {
             String path = Main.class.getResource("/sdk/Register_SDK.bat").getPath();
@@ -85,6 +103,11 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * 开机自启动
+     *
+     * @param event
+     */
     public void runAtLogon(ActionEvent event) {
         try {
             boolean isRun = ((CheckBox) event.getSource()).isSelected();
@@ -95,6 +118,9 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * 初始化页面组件
+     */
     public void initView(){
         try {
             String path = Main.class.getResource("/other/isRunAtLogon.bat").getPath();
@@ -102,10 +128,17 @@ public class Controller implements Initializable {
             Process process = Runtime.getRuntime().exec(path);
             InputStream in=process.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-            CboxRunAtLogon.setSelected(Boolean.valueOf(bufferedReader.readLine()));
-            tfIp.setText(PropertiesUtil.getValue("zkem.ipAddr"));
-            tfPort.setText( PropertiesUtil.getValue("zkem.port"));
-            tfNumber.setText(PropertiesUtil.getValue("zkem.number"));
+            Boolean isRun = Boolean.valueOf(bufferedReader.readLine());
+            CboxRunAtLogon.setSelected(isRun);
+            String port = PropertiesUtil.getValue("zkem.port");
+            String number = PropertiesUtil.getValue("zkem.number");
+            String ipAddr = PropertiesUtil.getValue("zkem.ipAddr");
+            tfIp.setText(ipAddr);
+            tfPort.setText(port);
+            tfNumber.setText(number);
+            if (isRun){
+                this.conn(null);
+            }
             in.close();
             bufferedReader.close();
         } catch (Exception e) {
@@ -113,10 +146,16 @@ public class Controller implements Initializable {
         }
     }
 
+    /**
+     * 初始化时调用
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Controller.Console console = new Controller.Console();
-        PrintStream ps = new PrintStream(console, true);
+        PrintStream ps = new PrintStream(console, false);
         System.setOut(ps);
         System.setErr(ps);
         System.err.flush();
@@ -124,6 +163,9 @@ public class Controller implements Initializable {
         initView();
     }
 
+    /**
+     * 自定义输出流
+     */
     private class Console extends OutputStream {
 
         @Override
@@ -131,13 +173,14 @@ public class Controller implements Initializable {
 
         }
 
+        /**
+         * 追加到TextArea日志面板
+         */
         @Override
         public void write(byte[] b, int off, int len) throws IOException {
-
             String info = new String(b, off, len, "UTF-8");
             logTextArea.appendText(info);
         }
-
     }
 
     /**
