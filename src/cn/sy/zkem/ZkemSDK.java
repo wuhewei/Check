@@ -21,7 +21,7 @@ public class ZkemSDK {
     private static ActiveXComponent zkem = new ActiveXComponent("zkemkeeper.ZKEM.1");
 
     /**
-     * 链接考勤机
+     * 连接考勤机
      *
      * @param address 考勤机地址
      * @param port    端口号
@@ -37,6 +37,7 @@ public class ZkemSDK {
      */
     public void disConnect() {
         zkem.invoke("Disconnect");
+        log.info("已断开考勤机连接");
     }
 
     /**

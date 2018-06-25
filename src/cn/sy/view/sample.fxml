@@ -1,38 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600" prefWidth="800"
-            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="cn.sy.view.Controller">
+<BorderPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sy.view.Controller">
     <top>
         <BorderPane prefHeight="83.0" prefWidth="485.0" style="-fx-padding: 30;" BorderPane.alignment="CENTER">
             <right>
-                <Button mnemonicParsing="false" onAction="#regService" text="①注册服务" BorderPane.alignment="CENTER"/>
+                <VBox>
+                    <Button mnemonicParsing="false" onAction="#regService"  prefWidth="70.0" text="注册服务" />
+                    <CheckBox mnemonicParsing="false" onAction="#runAtLogon" text="开机运行"></CheckBox>
+                </VBox>
+
             </right>
             <left>
                 <AnchorPane maxHeight="55">
                     <children>
-                        <Label layoutX="6.0" layoutY="6.0" text="考勤机IP："/>
-                        <TextField fx:id="tfIp" layoutX="65.0" prefHeight="28.0" prefWidth="128.0"
-                                   text="192.168.0.240"/>
-                        <Label layoutX="206.0" layoutY="6.0" prefHeight="15.0" prefWidth="72.0" text="考勤机端口："/>
-                        <TextField fx:id="tfPort" layoutX="278.0" prefHeight="28.0" prefWidth="59.0" text="4370"/>
-                        <Label layoutX="350" layoutY="6.0" prefHeight="15.0" prefWidth="72.0" text="考勤机号："/>
-                        <TextField fx:id="tfNumber" layoutX="410" prefHeight="28.0" prefWidth="59.0" text="1"/>
-                        <Button fx:id="btnCon" layoutX="480" mnemonicParsing="false" onAction="#conn" prefHeight="28.0"
-                                prefWidth="72.0" text="连接"/>
+                        <Label layoutX="6.0" layoutY="6.0" text="考勤机IP：" />
+                        <TextField fx:id="tfIp" layoutX="65.0" prefHeight="28.0" prefWidth="128.0" text="192.168.0.240" />
+                        <Label layoutX="206.0" layoutY="6.0" prefHeight="15.0" prefWidth="72.0" text="考勤机端口：" />
+                        <TextField fx:id="tfPort" layoutX="278.0" prefHeight="28.0" prefWidth="59.0" text="4370" />
+                        <Label layoutX="350" layoutY="6.0" prefHeight="15.0" prefWidth="72.0" text="考勤机号：" />
+                        <TextField fx:id="tfNumber" layoutX="410" prefHeight="28.0" prefWidth="59.0" text="1" />
+                        <Button fx:id="btnDisCon" layoutX="480" mnemonicParsing="false" onAction="#disConn" prefHeight="28.0" prefWidth="72.0" text="断开连接" visible="false" />
+                        <Button fx:id="btnCon" layoutX="480" mnemonicParsing="false" onAction="#conn" prefHeight="28.0" prefWidth="72.0" text="连接" />
                     </children>
                 </AnchorPane>
             </left>
         </BorderPane>
     </top>
     <center>
-        <TextArea fx:id="logTextArea" editable="false" prefHeight="343.0" prefWidth="600.0" promptText="日志面板"
-                  BorderPane.alignment="CENTER"/>
+        <TextArea fx:id="logTextArea" editable="false" prefHeight="343.0" prefWidth="600.0" promptText="日志面板" BorderPane.alignment="CENTER" />
     </center>
 </BorderPane>

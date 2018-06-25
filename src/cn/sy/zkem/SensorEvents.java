@@ -52,7 +52,8 @@ public class SensorEvents extends EventObject {
     public void OnAttTransactionEx(Variant[] arge) {
         log.info("当验证通过时触发该事件====" + arge[0].toString());
         log.info("当验证通过时触发该事件====" + zkem.getIpAddr());
-
+        Integer stuNumber = Integer.parseInt(arge[0].toString());
+        checkService.addRecord(stuNumber, zkem.getNumber());
     }
 
     /**
@@ -81,8 +82,6 @@ public class SensorEvents extends EventObject {
     public void OnVerify(Variant[] arge) {
         log.info("当用户验证时触发该消息=====" + arge[0].toString());
         log.info("当用户验证时触发该消息=====" + zkem.toString());
-        Integer stuNumber = Integer.parseInt(arge[0].toString());
-        checkService.addRecord(stuNumber, zkem.getNumber());
     }
 
     /**

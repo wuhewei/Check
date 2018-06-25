@@ -1,19 +1,21 @@
 package cn.sy.view;
 
+import cn.sy.model.ZkemConf;
+import cn.sy.util.IocUtils;
+import cn.sy.zkem.ZkemSDK;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import org.nutz.dao.Cnd;
+import org.nutz.dao.Dao;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,6 +25,8 @@ public class Controller implements Initializable {
 
     @FXML
     private Button btnCon;
+    @FXML
+    private Button btnDisCon;
     @FXML
     private Button btnReg;
     @FXML
@@ -34,40 +38,62 @@ public class Controller implements Initializable {
     @FXML
     private TextArea logTextArea;
 
+    private ZkemSDK sdk = new ZkemSDK();
+
     public void conn(ActionEvent event) {
-        ((Button) event.getSource()).setText("连接中...");
-        ((Button) event.getSource()).setDisable(true);
-        log.info(System.getProperty("file.encoding"));
-        log.info("你好");
-       /* Dao dao = IocUtils.getConn();
-        ZkemConf zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=",  tfIp.getText())
+
+        Dao dao = IocUtils.getConn();
+        ZkemConf zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=", tfIp.getText())
                 .and("port", "=", tfPort.getText())
                 .and("number", "=", tfNumber.getText()));
-        if(zkem == null){
+        if (zkem == null) {
             log.error("系统不存在该考勤机");
             return;
         }
-        ZkemSDK sdk = new ZkemSDK();
+        ((Button) event.getSource()).setText("连接中...");
+        ((Button) event.getSource()).setDisable(true);
         boolean connFlag = sdk.connect(zkem.getIpAddr(), zkem.getPort());
+        ((Button) event.getSource()).setText("连接");
+        ((Button) event.getSource()).setDisable(false);
         if (connFlag) {
-            ((Button)event.getSource()).setText("已连接");
+            ((Button) event.getSource()).setVisible(false);
+            btnDisCon.setVisible(true);
             log.info("连接成功！");
             sdk.regEvent(zkem);
         } else {
-            ((Button)event.getSource()).setText("连接");
-            ((Button)event.getSource()).setDisable(false);
             log.error("连接失败！");
-        }*/
+        }
+
+    }
+
+    public void disConn(ActionEvent event) {
+        sdk.disConnect();
+        btnDisCon.setVisible(false);
+        btnCon.setVisible(true);
     }
 
     public void regService(ActionEvent event) {
         try {
             String path = Main.class.getResource("/sdk/Register_SDK.bat").getPath();
-            Runtime.getRuntime().exec("cmd /c start" + path);
-            log.info("注册服务成功！");
+            path = path.substring(1, path.length());
+            Runtime.getRuntime().exec(path);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void runAtLogon(ActionEvent event) {
+        try {
+            boolean isRun = ((CheckBox) event.getSource()).isSelected();
+            changeAutoRunAtLogon(isRun);
+            log.info((isRun ? "启动" : "取消") + "开机运行本程序");
+        } catch (IOException e) {
+            log.info("设置失败", e);
+        }
+    }
+
+    public void initView(){
+
     }
 
     @Override
@@ -84,8 +110,29 @@ public class Controller implements Initializable {
 
         @Override
         public void write(int b) throws IOException {
-            logTextArea.appendText(String.valueOf((char) b));
+
+        }
+
+        @Override
+        public void write(byte[] b, int off, int len) throws IOException {
+
+            String info = new String(b, off, len, "UTF-8");
+            logTextArea.appendText(info);
         }
 
     }
+
+    /**
+     * 修改注册表，实现程序自启动
+     *
+     * @param isRun 是否开机启动
+     * @throws IOException
+     */
+    public static void changeAutoRunAtLogon(boolean isRun) throws IOException {
+        String regKey = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+        String myAppName = "Check";
+        String exePath = System.getProperty("user.dir") + "Check.exe";
+        Runtime.getRuntime().exec("reg " + (isRun ? "add " : "delete ") + regKey + " /v " + myAppName + (isRun ? " /d " + exePath : "") + " /f");
+    }
+
 }
