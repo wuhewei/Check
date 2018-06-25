@@ -16,7 +16,7 @@
             <right>
                 <VBox>
                     <Button mnemonicParsing="false" onAction="#regService"  prefWidth="70.0" text="注册服务" />
-                    <CheckBox mnemonicParsing="false" onAction="#runAtLogon" text="开机运行"></CheckBox>
+                    <CheckBox fx:id="CboxRunAtLogon" mnemonicParsing="false" onAction="#runAtLogon" text="开机运行"></CheckBox>
                 </VBox>
 
             </right>

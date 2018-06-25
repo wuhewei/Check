@@ -2,6 +2,7 @@ package cn.sy.view;
 
 import cn.sy.model.ZkemConf;
 import cn.sy.util.IocUtils;
+import cn.sy.util.PropertiesUtil;
 import cn.sy.zkem.ZkemSDK;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +38,8 @@ public class Controller implements Initializable {
     private TextField tfNumber;
     @FXML
     private TextArea logTextArea;
+    @FXML
+    private CheckBox CboxRunAtLogon;
 
     private ZkemSDK sdk = new ZkemSDK();
 
@@ -93,7 +96,21 @@ public class Controller implements Initializable {
     }
 
     public void initView(){
-
+        try {
+            String path = Main.class.getResource("/other/isRunAtLogon.bat").getPath();
+            path = path.substring(1, path.length());
+            Process process = Runtime.getRuntime().exec(path);
+            InputStream in=process.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
+            CboxRunAtLogon.setSelected(Boolean.valueOf(bufferedReader.readLine()));
+            tfIp.setText(PropertiesUtil.getValue("zkem.ipAddr"));
+            tfPort.setText( PropertiesUtil.getValue("zkem.port"));
+            tfNumber.setText(PropertiesUtil.getValue("zkem.number"));
+            in.close();
+            bufferedReader.close();
+        } catch (Exception e) {
+            log.info("初始化组件失败", e);
+        }
     }
 
     @Override
@@ -104,6 +121,7 @@ public class Controller implements Initializable {
         System.setErr(ps);
         System.err.flush();
         System.out.flush();
+        initView();
     }
 
     private class Console extends OutputStream {
