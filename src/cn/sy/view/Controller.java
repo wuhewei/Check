@@ -2,6 +2,7 @@ package cn.sy.view;
 
 import cn.sy.model.ZkemConf;
 import cn.sy.util.IocUtils;
+import cn.sy.util.PathUtil;
 import cn.sy.util.PropertiesUtil;
 import cn.sy.zkem.ZkemSDK;
 import javafx.application.Platform;
@@ -104,7 +105,7 @@ public class Controller implements Initializable {
      */
     public void regService(ActionEvent event) {
         try {
-            String path =  new File("sdk/Register_SDK.bat").getAbsolutePath();
+            String path =  Controller.this.getClass().getResource("sdk/Register_SDK.bat").getFile();
             Runtime.getRuntime().exec(path);
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +132,7 @@ public class Controller implements Initializable {
      */
     public void initView(){
         try {
-            String path = new File("isRunAtLogon.bat").getAbsolutePath();
+            String path = getClass().getResource("isRunAtLogon.bat").getFile();
             Process process = Runtime.getRuntime().exec(path);
             InputStream in = process.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
@@ -199,7 +200,7 @@ public class Controller implements Initializable {
     public static void changeAutoRunAtLogon(boolean isRun) throws IOException {
         String regKey = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         String myAppName = "Check";
-        String exePath = System.getProperty("user.dir") + "\\check.exe";
+        String exePath = PathUtil.getUserDirParent() + "\\check.exe";
         Runtime.getRuntime().exec("reg " + (isRun ? "add " : "delete ") + regKey + " /v " + myAppName + (isRun ? " /d " + exePath : "") + " /f");
     }
 

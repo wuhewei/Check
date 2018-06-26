@@ -6,7 +6,7 @@ import java.util.Properties;
 public class PropertiesUtil {
 
     private static  Properties prop = new Properties();
-    private final static String file = Properties.class.getClass().getResource("/zkem-info.properties").getPath();
+    private final static String file = new PropertiesUtil().getClass().getResource("zkem-info.properties").getFile();
 
     static {
         try {
