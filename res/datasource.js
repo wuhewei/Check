@@ -11,8 +11,10 @@ var ioc = {
             password: "123456",
             initialSize: 5,
             maxActive: 10,
-            maxIdle: 10,
-            defaultAutoCommit: true,
+            maxIdle: 1000,
+            timeBetweenEvictionRunsMillis : 3600000,
+            minEvictableIdleTimeMillis : 3600000,
+            defaultAutoCommit: false,
             // validationQuery: "select 1 from dual "
         }
     },

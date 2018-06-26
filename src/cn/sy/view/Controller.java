@@ -65,13 +65,22 @@ public class Controller implements Initializable {
         btnCon.setText("连接");
         btnCon.setDisable(false);
         if (connFlag) {
+            log.info("连接成功！");
             btnCon.setVisible(false);
             btnDisCon.setVisible(true);
-            log.info("连接成功！");
-            sdk.regEvent(zkem);
-            PropertiesUtil.setValue("zkem.ipAddt", tfIp.getText());
+            PropertiesUtil.setValue("zkem.ipAddr", tfIp.getText());
             PropertiesUtil.setValue("zkem.port", tfPort.getText());
             PropertiesUtil.setValue("zkem.number", tfNumber.getText());
+            if(event == null){
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                       sdk.regEvent(zkem);
+                    }
+                }).start();
+            }else {
+                sdk.regEvent(zkem);
+            }
         } else {
             log.error("连接失败！");
         }
@@ -95,8 +104,7 @@ public class Controller implements Initializable {
      */
     public void regService(ActionEvent event) {
         try {
-            String path = Main.class.getResource("/sdk/Register_SDK.bat").getPath();
-            path = path.substring(1, path.length());
+            String path =  new File("sdk/Register_SDK.bat").getAbsolutePath();
             Runtime.getRuntime().exec(path);
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,20 +131,19 @@ public class Controller implements Initializable {
      */
     public void initView(){
         try {
-            String path = Main.class.getResource("/other/isRunAtLogon.bat").getPath();
-            path = path.substring(1, path.length());
+            String path = new File("isRunAtLogon.bat").getAbsolutePath();
             Process process = Runtime.getRuntime().exec(path);
-            InputStream in=process.getInputStream();
+            InputStream in = process.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
             Boolean isRun = Boolean.valueOf(bufferedReader.readLine());
-            CboxRunAtLogon.setSelected(isRun);
+            String ipAddr = PropertiesUtil.getValue("zkem.ipAddr");
             String port = PropertiesUtil.getValue("zkem.port");
             String number = PropertiesUtil.getValue("zkem.number");
-            String ipAddr = PropertiesUtil.getValue("zkem.ipAddr");
+            CboxRunAtLogon.setSelected(isRun);
             tfIp.setText(ipAddr);
             tfPort.setText(port);
             tfNumber.setText(number);
-            if (isRun){
+            if(isRun){
                 this.conn(null);
             }
             in.close();
@@ -192,7 +199,7 @@ public class Controller implements Initializable {
     public static void changeAutoRunAtLogon(boolean isRun) throws IOException {
         String regKey = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         String myAppName = "Check";
-        String exePath = System.getProperty("user.dir") + "Check.exe";
+        String exePath = System.getProperty("user.dir") + "\\check.exe";
         Runtime.getRuntime().exec("reg " + (isRun ? "add " : "delete ") + regKey + " /v " + myAppName + (isRun ? " /d " + exePath : "") + " /f");
     }
 

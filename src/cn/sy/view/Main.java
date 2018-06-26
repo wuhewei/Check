@@ -22,4 +22,9 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
+
+    @Override
+    public void stop() throws Exception {
+//        System.exit(0);
+    }
 }

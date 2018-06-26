@@ -1,31 +1,34 @@
 package cn.sy.util;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 public class PropertiesUtil {
-    public static String getValue(String key){
-        Properties prop = new Properties();
-        InputStream in = new PropertiesUtil().getClass().getResourceAsStream("/zkem-info.properties");
-        try {
-            prop.load(in);
 
-        } catch (IOException e) {
+    private static  Properties prop = new Properties();
+    private final static String file = Properties.class.getClass().getResource("/zkem-info.properties").getPath();
+
+    static {
+        try {
+            prop.load(new FileInputStream(file));
+        }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static String getValue(String key){
         return prop.getProperty(key);
     }
 
     public static void setValue(String key, String value){
-        Properties prop = new Properties();
-        InputStream in = new PropertiesUtil().getClass().getResourceAsStream("/zkem-info.properties");
+       prop.setProperty(key, value);
         try {
-            prop.load(in);
+            FileOutputStream fos = new FileOutputStream(file);
+            prop.store(fos, null);
+            fos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        prop.setProperty(key, value);
     }
 
 }
