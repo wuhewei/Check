@@ -5,7 +5,6 @@ import cn.sy.util.IocUtils;
 import cn.sy.util.PathUtil;
 import cn.sy.util.PropertiesUtil;
 import cn.sy.zkem.ZkemSDK;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,8 +20,6 @@ import org.nutz.log.Logs;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Controller implements Initializable {
 
@@ -105,7 +102,7 @@ public class Controller implements Initializable {
      */
     public void regService(ActionEvent event) {
         try {
-            String path =  Controller.this.getClass().getResource("sdk/Register_SDK.bat").getFile();
+            String path =  new File("files/sdk/Register_SDK.bat").getAbsolutePath();
             Runtime.getRuntime().exec(path);
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,7 +129,7 @@ public class Controller implements Initializable {
      */
     public void initView(){
         try {
-            String path = getClass().getResource("isRunAtLogon.bat").getFile();
+            String path = new File("files/isRunAtLogon.bat").getAbsolutePath();
             Process process = Runtime.getRuntime().exec(path);
             InputStream in = process.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
@@ -186,7 +183,7 @@ public class Controller implements Initializable {
          */
         @Override
         public void write(byte[] b, int off, int len) throws IOException {
-            String info = new String(b, off, len, "UTF-8");
+            String info = new String(b, off, len);
             logTextArea.appendText(info);
         }
     }

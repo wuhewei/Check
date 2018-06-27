@@ -6,16 +6,15 @@ var ioc = {
         },
         fields: {
             driverClassName: "com.mysql.jdbc.Driver",
-            url: "jdbc:mysql://localhost/check?useUnicode=true&characterEncoding=utf-8",
-            username: "root",
-            password: "123456",
+            url : "jdbc:mysql://www.panming.net/caiyibang_test?useUnicode=true&characterEncoding=utf-8",
+            username : "developer",
+            password : "shengyu",
             initialSize: 5,
             maxActive: 10,
             maxIdle: 1000,
             timeBetweenEvictionRunsMillis : 3600000,
             minEvictableIdleTimeMillis : 3600000,
             defaultAutoCommit: false,
-            // validationQuery: "select 1 from dual "
         }
     },
     dao: {

@@ -6,7 +6,7 @@ import java.util.Properties;
 public class PropertiesUtil {
 
     private static  Properties prop = new Properties();
-    private final static String file = new PropertiesUtil().getClass().getResource("zkem-info.properties").getFile();
+    private final static String file = new File("files/zkem-info.properties").getAbsolutePath();
 
     static {
         try {
@@ -31,4 +31,7 @@ public class PropertiesUtil {
         }
     }
 
+    public static void main(String[] args){
+        System.out.println(PropertiesUtil.getValue("zkem.ipAddr"));
+    }
 }
