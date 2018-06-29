@@ -6,9 +6,9 @@ var ioc = {
         },
         fields: {
             driverClassName: "com.mysql.jdbc.Driver",
-            url : "jdbc:mysql://www.panming.net/caiyibang_test?useUnicode=true&characterEncoding=utf-8",
+            url : "jdbc:mysql://cyb.child2newness.com/caiyibang_test?useUnicode=true&characterEncoding=utf-8",
             username : "developer",
-            password : "shengyu",
+            password : "Shengyu@123",
             initialSize: 5,
             maxActive: 10,
             maxIdle: 1000,

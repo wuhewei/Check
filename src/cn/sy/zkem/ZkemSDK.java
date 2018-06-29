@@ -41,6 +41,16 @@ public class ZkemSDK {
     }
 
     /**
+     * 读取考勤记录到 PC 的内部缓冲区，同 ReadAllGLogData
+     * @param number 机器号
+     * @return
+     */
+    public boolean ReadAllGLogData(int number){
+        boolean result = zkem.invoke("ReadAllGLogData", number).getBoolean();
+        return result;
+    }
+
+    /**
      * 监控考勤机实时事件
      */
     public void regEvent(ZkemConf zkemConf) {
@@ -57,4 +67,18 @@ public class ZkemSDK {
         STA sta = new STA();
         sta.doMessagePump();
     }
+
+    public static void main(String[] args){
+        ZkemSDK zkemSDK = new ZkemSDK();
+        boolean connect = zkemSDK.connect("192.168.0.240", 4370);
+        if (connect){
+            System.out.println("Connect success!");
+            boolean readAllGLogData = zkemSDK.ReadAllGLogData(1);
+            if (readAllGLogData){
+                System.out.println("读取数据到缓存区成功！");
+            }
+        }
+    }
+
+
 }  

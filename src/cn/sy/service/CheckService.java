@@ -24,6 +24,12 @@ public class CheckService {
         dao = IocUtils.getConn();
     }
 
+    /**
+     * 录入考勤记录
+     *
+     * @param stuNumber 学员编号/卡号
+     * @param zkemNumber 机器号
+     */
     public void addRecord(Integer stuNumber, Integer zkemNumber) {
         CheckRecord record = new CheckRecord();
         record.setStudentNumber(stuNumber);
@@ -33,4 +39,5 @@ public class CheckService {
         log.info("实时录入考勤信息" + (record == null ? "失败" : "成功") +
                 "，学员编号：" + stuNumber);
     }
+
 }
