@@ -15,16 +15,16 @@ import org.nutz.log.Logs;
 public class IocUtils {
 
     private static Log log = Logs.getLog(IocUtils.class);
-
-    public static Dao getConn() {
-        Dao dao = null;
+    private static  Ioc ioc = null;
+    static {
         try {
-            Ioc ioc = new NutIoc(new ComboIocLoader(new String[]{"*org.nutz.ioc.loader.json.JsonLoader", "datasource.js"}));
-            dao = ioc.get(Dao.class);
+            ioc = new NutIoc(new ComboIocLoader(new String[]{"*org.nutz.ioc.loader.json.JsonLoader", "datasource.js"}));
         } catch (Exception e) {
             log.error("获取数据库连接失败", e);
         }
+    }
 
-        return dao;
+    public static Dao getConn() {
+        return ioc.get(Dao.class);
     }
 }

@@ -1,24 +1,26 @@
 package cn.sy.view;
 
+import cn.sy.model.CheckRecord;
 import cn.sy.model.ZkemConf;
-import cn.sy.util.IocUtils;
-import cn.sy.util.PathUtil;
-import cn.sy.util.PropertiesUtil;
+import cn.sy.service.CheckService;
+import cn.sy.util.*;
 import cn.sy.zkem.ZkemSDK;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
-
 import java.io.*;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -30,8 +32,6 @@ public class Controller implements Initializable {
     @FXML
     private Button btnDisCon;
     @FXML
-    private Button btnReg;
-    @FXML
     private TextField tfIp;
     @FXML
     private TextField tfPort;
@@ -41,16 +41,32 @@ public class Controller implements Initializable {
     private TextArea logTextArea;
     @FXML
     private CheckBox CboxRunAtLogon;
+    @FXML
+    private DatePicker dpStartDate;
+    @FXML
+    private DatePicker dpEndDate;
+    @FXML
+    private TableView<CheckRecord> tableView;
+    @FXML
+    private TableColumn<CheckRecord, Integer> colNumber;
+    @FXML
+    private TableColumn<CheckRecord, Date> colCheckTime;
+
+    private CheckService checkService = new CheckService();
 
     private ZkemSDK sdk = new ZkemSDK();
+    private ZkemConf zkem = null;
+
 
     /**
      * 连接考勤机
      * @param event
      */
+    @FXML
     public void conn(ActionEvent event) {
         Dao dao = IocUtils.getConn();
-        ZkemConf zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=", tfIp.getText())
+
+        zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=", tfIp.getText())
                 .and("port", "=", tfPort.getText())
                 .and("number", "=", tfNumber.getText()));
         if (zkem == null) {
@@ -69,16 +85,24 @@ public class Controller implements Initializable {
             PropertiesUtil.setValue("zkem.ipAddr", tfIp.getText());
             PropertiesUtil.setValue("zkem.port", tfPort.getText());
             PropertiesUtil.setValue("zkem.number", tfNumber.getText());
-            if(event == null){
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                       sdk.regEvent(zkem);
-                    }
-                }).start();
-            }else {
-                sdk.regEvent(zkem);
-            }
+
+            Task zkemTask = new Task<Void>(){
+                @Override
+                protected Void call() throws Exception {
+                    checkService.addCannotSensorRecord(sdk, zkem);
+                    return null;
+                }
+            };
+            Task sensorTask = new Task<Void>(){
+                @Override
+                protected Void call() throws Exception {
+                    sdk.regEvent(zkem);
+                    return null;
+                }
+            };
+            new Thread(sensorTask).start();
+            new Thread(zkemTask).start();
+
         } else {
             log.error("连接失败！");
         }
@@ -89,10 +113,66 @@ public class Controller implements Initializable {
      *
      * @param event
      */
+    @FXML
     public void disConn(ActionEvent event) {
         sdk.disConnect();
+        zkem = null;
         btnDisCon.setVisible(false);
         btnCon.setVisible(true);
+    }
+    /**
+     * 查看当天考勤
+     *
+     * @param event
+     */
+    @FXML
+    public void showTodayRecord(ActionEvent event) {
+        if (zkem == null) {
+            AlertUtil.alertInformation("请连接考勤机");
+            return;
+        }
+        ObservableList<CheckRecord> records = FXCollections.observableArrayList();
+        for(CheckRecord record : checkService.getTodayRecord(sdk, zkem)){
+            records.add(record);
+        }
+
+        tableView.setItems(records);
+        tableView.refresh();
+    }
+
+    /**
+     * 搜索记录
+     * 条件：根据指定日期
+     *
+     */
+    @FXML
+    public void searchFixedDay(){
+        if (zkem == null) {
+            AlertUtil.alertInformation("请连接考勤机");
+            return;
+        }
+        LocalDate localStart = dpStartDate.getValue();
+        LocalDate localEnd = dpEndDate.getValue();
+        if(localStart == null || localEnd == null){
+            AlertUtil.alertInformation("请指定日期范围");
+            return;
+        }
+        ObservableList<CheckRecord> records = FXCollections.observableArrayList();
+        Date start = DateUtil.formatYMD(localStart.toString());
+        Date end = DateUtil.formatYMD(localEnd.toString());
+        Task searchTask = new Task<Void>(){
+            @Override
+            protected Void call() throws Exception {
+                for(CheckRecord record : checkService.getFixedDayRecord(sdk, zkem, start, end)){
+                    records.add(record);
+                }
+                tableView.setItems(records);
+                return null;
+            }
+        };
+        new Thread(searchTask).start();
+
+
     }
 
     /**
@@ -127,7 +207,7 @@ public class Controller implements Initializable {
     /**
      * 初始化页面组件
      */
-    public void initView(){
+    private void initView(){
         try {
             String path = new File("files/isRunAtLogon.bat").getAbsolutePath();
             Process process = Runtime.getRuntime().exec(path);
@@ -152,6 +232,27 @@ public class Controller implements Initializable {
     }
 
     /**
+     * 初始化表格绑定数据列
+     *
+     */
+    private void initTableView(){
+        colNumber.setCellValueFactory(new PropertyValueFactory<>("studentNumber"));
+        colCheckTime.setCellValueFactory(new PropertyValueFactory<>("checkTime"));
+        colCheckTime.setCellFactory(column -> {
+            TableCell<CheckRecord, Date> cell = new TableCell<CheckRecord, Date>() {
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    if (!empty){
+                        this.setText(DateUtil.format(item));
+                    }
+                }
+            };
+            return cell;
+        });
+    }
+
+
+    /**
      * 初始化时调用
      *
      * @param location
@@ -166,6 +267,7 @@ public class Controller implements Initializable {
         System.err.flush();
         System.out.flush();
         initView();
+        initTableView();
     }
 
     /**
@@ -194,7 +296,7 @@ public class Controller implements Initializable {
      * @param isRun 是否开机启动
      * @throws IOException
      */
-    public static void changeAutoRunAtLogon(boolean isRun) throws IOException {
+    private static void changeAutoRunAtLogon(boolean isRun) throws IOException {
         String regKey = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
         String myAppName = "Check";
         String exePath = PathUtil.getUserDirParent() + "\\check.exe";

@@ -8,7 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,9 +40,12 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("考勤机实时监控程序");
-        primaryStage.getIcons().add(new Image(
-                Main.class.getResourceAsStream("/app.png")));
+        primaryStage.getIcons().add(new Image( Main.class.getResourceAsStream("/app.png")));
         primaryStage.setScene(new Scene(root, 800, 600));
+        SystemTray tray = SystemTray.getSystemTray();
+        TrayIcon trayIcon = new TrayIcon(ImageIO.read(Main.class.getResourceAsStream("/app.png")));
+        trayIcon.setToolTip("考勤机实时监控程序");
+        tray.add(trayIcon);
         primaryStage.show();
     }
 
