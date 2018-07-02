@@ -5,6 +5,7 @@ import cn.sy.model.ZkemConf;
 import cn.sy.service.CheckService;
 import cn.sy.util.*;
 import cn.sy.zkem.ZkemSDK;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -132,12 +133,19 @@ public class Controller implements Initializable {
             return;
         }
         ObservableList<CheckRecord> records = FXCollections.observableArrayList();
-        for(CheckRecord record : checkService.getTodayRecord(sdk, zkem)){
-            records.add(record);
-        }
-
-        tableView.setItems(records);
-        tableView.refresh();
+        Task searchTask = new Task<Void>(){
+            @Override
+            protected Void call() throws Exception {
+                for(CheckRecord record : checkService.getTodayRecord(sdk, zkem)){
+                    records.add(record);
+                }
+                tableView.setItems(records);
+                updateButtonLater(((Button)event.getSource()), "查看今天记录", false);
+                return null;
+            }
+        };
+        new Thread(searchTask).start();
+        updateButtonLater(((Button)event.getSource()), "搜索中...", true);
     }
 
     /**
@@ -146,7 +154,7 @@ public class Controller implements Initializable {
      *
      */
     @FXML
-    public void searchFixedDay(){
+    public void searchFixedDay(ActionEvent event){
         if (zkem == null) {
             AlertUtil.alertInformation("请连接考勤机");
             return;
@@ -167,12 +175,23 @@ public class Controller implements Initializable {
                     records.add(record);
                 }
                 tableView.setItems(records);
+                updateButtonLater(((Button)event.getSource()), "搜索记录", false);
                 return null;
             }
         };
+//        Platform.runLater(searchTask);
         new Thread(searchTask).start();
+        updateButtonLater(((Button)event.getSource()), "搜索中...", true);
 
-
+    }
+    private void updateButtonLater(final Button button, final String text, final boolean disable) {
+        Platform.runLater(new Runnable() {
+            @Override public void run() {
+                button.setGraphic(null);
+                button.setDisable(disable);
+                button.setText(text);
+            }
+        });
     }
 
     /**
