@@ -54,36 +54,6 @@ public class ZkemSDK {
     }
 
     /**
-     * 读取该时间之后的最新考勤数据， 配合getGeneralLogData使用。
-     *
-     * @param lastest
-     * @return
-     */
-    public boolean readLastestLogData(Date lastest) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(lastest);
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH) + 1;
-        int day = c.get(Calendar.DAY_OF_MONTH);
-        int hours = c.get(Calendar.HOUR_OF_DAY);
-        int minutes = c.get(Calendar.MINUTE);
-        int seconds = c.get(Calendar.SECOND);
-
-        Variant v0 = new Variant(1);
-        Variant vLog = new Variant(1);
-        Variant dwYear = new Variant(year, true);
-        Variant dwMonth = new Variant(month, true);
-        Variant dwDay = new Variant(day, true);
-        Variant dwHour = new Variant(hours, true);
-        Variant dwMinute = new Variant(minutes, true);
-        Variant dwSecond = new Variant(seconds, true);
-
-        boolean result = zkem.invoke("ReadLastestLogData", v0, vLog, dwYear,
-                dwMonth, dwDay, dwHour, dwMinute, dwSecond).getBoolean();
-        return result;
-    }
-
-    /**
      * 获取缓存中的考勤数据，配合readGeneralLogData / readLastestLogData使用。
      * @return 返回的map中，包含以下键值：
      *      "EnrollNumber"  人员编号

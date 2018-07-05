@@ -66,7 +66,6 @@ public class Controller implements Initializable {
     @FXML
     public void conn(ActionEvent event) {
         Dao dao = IocUtils.getConn();
-
         zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=", tfIp.getText())
                 .and("port", "=", tfPort.getText())
                 .and("number", "=", tfNumber.getText()));
@@ -74,11 +73,8 @@ public class Controller implements Initializable {
             log.error("系统不存在该考勤机");
             return;
         }
-        btnCon.setText("连接中...");
-        btnCon.setDisable(true);
+        updateButtonLater(btnCon, "连接中...", true);
         boolean connFlag = sdk.connect(zkem.getIpAddr(), zkem.getPort());
-        btnCon.setText("连接");
-        btnCon.setDisable(false);
         if (connFlag) {
             log.info("连接成功！");
             btnCon.setVisible(false);
@@ -101,10 +97,13 @@ public class Controller implements Initializable {
                     return null;
                 }
             };
-            new Thread(sensorTask).start();
+            Thread th1 = new Thread(sensorTask);
+            th1.setDaemon(true);
+            th1.start();
             new Thread(zkemTask).start();
 
         } else {
+            updateButtonLater(btnCon, "连接", false);
             log.error("连接失败！");
         }
     }
@@ -179,7 +178,6 @@ public class Controller implements Initializable {
                 return null;
             }
         };
-//        Platform.runLater(searchTask);
         new Thread(searchTask).start();
         updateButtonLater(((Button)event.getSource()), "搜索中...", true);
 

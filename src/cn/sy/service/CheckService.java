@@ -29,7 +29,7 @@ public class CheckService {
     private static Log log = Logs.getLog(CheckService.class);
     private static Dao dao;
 
-    static {
+    public CheckService() {
         dao = IocUtils.getConn();
     }
 
@@ -70,9 +70,8 @@ public class CheckService {
                 @Override
                 public void run() {
                     if (list.size() > 0){
-//                        dao.fastInsert(list);
-                        log.info(list);
-                        log.info("成功恢复" + lastRecord == null ? "" : (DateUtil.format(lastRecord.getCheckTime()) + "之后的") + list.size() + "条考勤记录");
+                        dao.fastInsert(list);
+                        log.info("成功恢复" + (lastRecord == null ? "" : (DateUtil.format(lastRecord.getCheckTime()) + "之后的")) + list.size() + "条考勤记录");
                     }
                 }
             });
