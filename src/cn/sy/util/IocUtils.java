@@ -1,6 +1,8 @@
 package cn.sy.util;
 
 import org.nutz.dao.Dao;
+import org.nutz.dao.impl.NutDao;
+import org.nutz.dao.impl.SimpleDataSource;
 import org.nutz.ioc.Ioc;
 import org.nutz.ioc.impl.NutIoc;
 import org.nutz.ioc.loader.combo.ComboIocLoader;

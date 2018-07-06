@@ -1,5 +1,6 @@
 package cn.sy.view;
 
+import cn.sy.util.AlertUtil;
 import cn.sy.util.PathUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -17,13 +20,15 @@ import java.io.PrintWriter;
 
 public class Main extends Application {
 
+    private static Log log = Logs.getLog(Application.class);
+
     public static void main(String[] args) {
         try {
             Main.launch(args);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "运行错误，详情请看根目录下error.txt文件");
+            JOptionPane.showMessageDialog(null, "运行错误，详情请看根目录下error.log文件");
             try {
-                File file = new File(PathUtil.getUserDirParent() + "\\error.txt");
+                File file = new File(PathUtil.getUserDirParent() + "\\error.log");
                 if( !file.exists()){
                     file.createNewFile();
                 }
@@ -38,19 +43,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setController(new Controller());
+        loader.setLocation(getClass().getResource("/cn/sy/view/view.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("考勤机实时监控程序");
-        primaryStage.getIcons().add(new Image( Main.class.getResourceAsStream("/app.png")));
+        primaryStage.getIcons().add(new Image(
+                Main.class.getResourceAsStream("/app.png")));
         primaryStage.setScene(new Scene(root, 800, 600));
-        SystemTray tray = SystemTray.getSystemTray();
-        TrayIcon trayIcon = new TrayIcon(ImageIO.read(Main.class.getResourceAsStream("/app.png")));
-        trayIcon.setToolTip("考勤机实时监控程序");
-        tray.add(trayIcon);
         primaryStage.show();
     }
 
     @Override
     public void stop() throws Exception {
-        System.exit(0);
+//        System.exit(0);
     }
 }

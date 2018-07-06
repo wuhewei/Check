@@ -20,10 +20,10 @@ public class SensorEvents extends EventObject {
     private CheckService checkService;
     private ZkemConf zkem;
 
-    public SensorEvents(Object source, ZkemConf zkem) {
+    public SensorEvents(Object source, ZkemConf zkem, CheckService checkService) {
         super(source);
         this.zkem = zkem;
-        checkService = new CheckService();
+        this.checkService = checkService;
     }
 
     /**
