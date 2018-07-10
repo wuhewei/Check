@@ -1,14 +1,18 @@
 package cn.sy.zkem;
 
 import cn.sy.model.ZkemConf;
+import cn.sy.service.CheckService;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.DispatchEvents;
 import com.jacob.com.STA;
 import com.jacob.com.Variant;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
+import javax.swing.text.Document;
 import java.util.*;
 
 /**
@@ -55,19 +59,18 @@ public class ZkemSDK {
 
     /**
      * 获取缓存中的考勤数据，配合readGeneralLogData / readLastestLogData使用。
+     *
      * @return 返回的map中，包含以下键值：
-     *      "EnrollNumber"  人员编号
-     *      "Time"          考勤时间串，格式: yyyy-MM-dd HH:mm:ss
-     *      "VerifyMode"
-     *      "InOutMode"
-     *      "Year"          考勤时间：年
-     *      "Month"         考勤时间：月
-     *      "Day"           考勤时间：日
-     *      "Hour"			考勤时间：时
-     *      "Minute"		考勤时间：分
-     *      "Second"		考勤时间：秒
-     *
-     *
+     * "EnrollNumber"  人员编号
+     * "Time"          考勤时间串，格式: yyyy-MM-dd HH:mm:ss
+     * "VerifyMode"
+     * "InOutMode"
+     * "Year"          考勤时间：年
+     * "Month"         考勤时间：月
+     * "Day"           考勤时间：日
+     * "Hour"			考勤时间：时
+     * "Minute"		考勤时间：分
+     * "Second"		考勤时间：秒
      */
     public List<Map<String, Object>> getGeneralLogData() {
 
@@ -120,19 +123,43 @@ public class ZkemSDK {
     /**
      * 监控考勤机实时事件
      */
-    public void regEvent(ZkemConf zkemConf) {
+    public void regEvent(ZkemConf zkemConf, CheckService checkService) {
         Variant v0 = new Variant(1);
         Variant eventMask = new Variant(65535);
         zkem.invoke("RegEvent", v0, eventMask).getBoolean();
 
         Dispatch ob = zkem.getObject();
-        SensorEvents se = new SensorEvents(zkemConf.getIpAddr(), zkemConf);
+        SensorEvents se = new SensorEvents(zkemConf.getIpAddr(), zkemConf, checkService);
         DispatchEvents de = new DispatchEvents(ob, se);
 
         log.info("考勤机实时监听中...");
         Dispatch.call(zkem, "RegEvent", new Variant(1l), new Variant(65535l));
         STA sta = new STA();
         sta.doMessagePump();
+        Task sensorTask = new Task<Void>(){
+            @Override
+            protected Void call() throws Exception {
+                Dispatch.call(zkem, "RegEvent", new Variant(1l), new Variant(65535l));
+                STA sta = new STA();
+                sta.doMessagePump();
+                return null;
+            }
+        };
+        new Thread(sensorTask).start();
+       /* new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Dispatch.call(zkem, "RegEvent", new Variant(1l), new Variant(65535l));
+                    STA sta = new STA();
+                    sta.doMessagePump();
+                    System.in.read();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();*/
+
     }
 
     public static void main(String[] args) {

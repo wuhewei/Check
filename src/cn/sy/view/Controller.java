@@ -8,7 +8,9 @@ import cn.sy.zkem.ZkemSDK;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +25,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
 
 public class Controller implements Initializable {
 
@@ -57,7 +60,7 @@ public class Controller implements Initializable {
 
     private ZkemSDK sdk = new ZkemSDK();
     private ZkemConf zkem = null;
-
+    private Dao dao = null;
 
     /**
      * 连接考勤机
@@ -65,7 +68,7 @@ public class Controller implements Initializable {
      */
     @FXML
     public void conn(ActionEvent event) {
-        Dao dao = IocUtils.getConn();
+
         zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=", tfIp.getText())
                 .and("port", "=", tfPort.getText())
                 .and("number", "=", tfNumber.getText()));
@@ -79,10 +82,11 @@ public class Controller implements Initializable {
             log.info("连接成功！");
             btnCon.setVisible(false);
             btnDisCon.setVisible(true);
+            updateButtonLater(btnCon, "连接", false);
             PropertiesUtil.setValue("zkem.ipAddr", tfIp.getText());
             PropertiesUtil.setValue("zkem.port", tfPort.getText());
             PropertiesUtil.setValue("zkem.number", tfNumber.getText());
-
+            sdk.regEvent(zkem, checkService);
             Task zkemTask = new Task<Void>(){
                 @Override
                 protected Void call() throws Exception {
@@ -90,18 +94,9 @@ public class Controller implements Initializable {
                     return null;
                 }
             };
-            Task sensorTask = new Task<Void>(){
-                @Override
-                protected Void call() throws Exception {
-                    sdk.regEvent(zkem);
-                    return null;
-                }
-            };
-            Thread th1 = new Thread(sensorTask);
-            th1.setDaemon(true);
-            th1.start();
-            new Thread(zkemTask).start();
-
+            Thread thread1 = new Thread(zkemTask);
+            thread1.setName("考勤事件");
+            thread1.start();
         } else {
             updateButtonLater(btnCon, "连接", false);
             log.error("连接失败！");
@@ -138,6 +133,7 @@ public class Controller implements Initializable {
                 for(CheckRecord record : checkService.getTodayRecord(sdk, zkem)){
                     records.add(record);
                 }
+                tableView.refresh();
                 tableView.setItems(records);
                 updateButtonLater(((Button)event.getSource()), "查看今天记录", false);
                 return null;
@@ -173,6 +169,7 @@ public class Controller implements Initializable {
                 for(CheckRecord record : checkService.getFixedDayRecord(sdk, zkem, start, end)){
                     records.add(record);
                 }
+                tableView.refresh();
                 tableView.setItems(records);
                 updateButtonLater(((Button)event.getSource()), "搜索记录", false);
                 return null;
@@ -190,20 +187,6 @@ public class Controller implements Initializable {
                 button.setText(text);
             }
         });
-    }
-
-    /**
-     * 注册考勤机需要的动态库
-     *
-     * @param event
-     */
-    public void regService(ActionEvent event) {
-        try {
-            String path =  new File("files/sdk/Register_SDK.bat").getAbsolutePath();
-            Runtime.getRuntime().exec(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -241,8 +224,8 @@ public class Controller implements Initializable {
             if(isRun){
                 this.conn(null);
             }
-            in.close();
             bufferedReader.close();
+            in.close();
         } catch (Exception e) {
             log.info("初始化组件失败", e);
         }
@@ -283,6 +266,7 @@ public class Controller implements Initializable {
         System.setErr(ps);
         System.err.flush();
         System.out.flush();
+        dao = IocUtils.getConn();
         initView();
         initTableView();
     }

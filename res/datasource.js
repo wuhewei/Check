@@ -1,20 +1,18 @@
 var ioc = {
     dataSource: {
-        type: "org.apache.commons.dbcp.BasicDataSource",
-        events: {
-            depose: 'close'
-        },
+        type: "com.alibaba.druid.pool.DruidDataSource",
+        events: {depose: "close"},
         fields: {
             driverClassName: "com.mysql.jdbc.Driver",
-            url : "jdbc:mysql://localhost/check?useUnicode=true&characterEncoding=utf-8",
-            username : "root",
-            password : "123456",
+            url: "jdbc:mysql://cyb.child2newness.com/caiyibang_test?useUnicode=true&characterEncoding=utf-8",
+            username: "developer",
+            password: "Shengyu@123",
             initialSize: 5,
-            maxActive: 10,
-            maxIdle: 10,
-            timeBetweenEvictionRunsMillis : 3600000,
-            minEvictableIdleTimeMillis : 3600000,
-            defaultAutoCommit: true
+            maxActive: 30,
+            minIdle: 5,
+            defaultAutoCommit: false,
+            timeBetweenEvictionRunsMillis: 1800000,
+            minEvictableIdleTimeMillis: 1800000
         }
     },
     dao: {
