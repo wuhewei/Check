@@ -5,33 +5,10 @@
       <artifact name="check" />
     </artifacts-to-build>
   </component>
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java" line="51" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f1d84df-121e-47fe-be0f-9160893c99a2" name="Default" comment="">
+    <list default="true" id="0f1d84df-121e-47fe-be0f-9160893c99a2" name="Default" comment="完善">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/check.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/check.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/datasource.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/datasource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/isRunAtLogon.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/res/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/Delete_SDK.bat" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/Delete_SDK.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/Register_SDK.bat" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/Register_SDK.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/commpro.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/commpro.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/comms.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/comms.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/plcommpro.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/plcommpro.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/plcomms.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/plcomms.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/plrscagent.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/plrscagent.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/plrscomm.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/plrscomm.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/pltcpcomm.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/pltcpcomm.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/rscagent.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/rscagent.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/rscomm.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/rscomm.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/tcpcomm.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/tcpcomm.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/usbcomm.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/usbcomm.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/zkemkeeper.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/zkemkeeper.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/sdk/zkemsdk.dll" beforeDir="false" afterPath="$PROJECT_DIR$/files/sdk/zkemsdk.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/zkem-info.properties" beforeDir="false" afterPath="$PROJECT_DIR$/files/zkem-info.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cn/sy/util/PropertiesUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cn/sy/util/PropertiesUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cn/sy/view/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cn/sy/view/Controller.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,11 +17,6 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Check$Main__1_.ic" NAME="Main (1) Coverage Results" MODIFIED="1529995165665" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>cn.sy.view.*</FILTER>
-    </SUITE>
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -59,34 +31,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="sample.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/sy/view/sample.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="63" column="40" selection-start-line="63" selection-start-column="40" selection-end-line="63" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="zkem-info.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/files/zkem-info.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cn/sy/view/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="202" lean-forward="true" selection-start-line="202" selection-end-line="202" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2207#2208#0" expanded="true" />
-                <element signature="e#2272#2273#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="log4j.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/log4j.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ZkemSDK.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="924">
-              <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
+            <state relative-caret-position="620">
+              <caret line="38" column="9" lean-forward="true" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -97,8 +65,30 @@
       <file leaf-file-name="SensorEvents.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/SensorEvents.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="924">
-              <caret line="54" column="60" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="60" />
+            <state>
+              <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZkemSDK.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IocUtils.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/sy/util/IocUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+              <folding>
+                <element signature="e#629#630#0" expanded="true" />
+                <element signature="e#670#671#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -106,17 +96,12 @@
       <file leaf-file-name="CheckService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cn/sy/service/CheckService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/sy/view/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
+            <state>
+              <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+              <folding>
+                <element signature="e#666#667#0" expanded="true" />
+                <element signature="e#706#707#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,8 +109,21 @@
       <file leaf-file-name="datasource.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/datasource.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+            <state>
+              <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZkemConf.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/cn/sy/model/ZkemConf.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+              <folding>
+                <element signature="e#655#656#0" expanded="true" />
+                <element signature="e#684#685#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -155,6 +153,7 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -169,17 +168,21 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/cn/sy/model/CheckRecord.java" />
         <option value="$PROJECT_DIR$/src/cn/sy/view/ConsoleController.java" />
-        <option value="$PROJECT_DIR$/src/cn/sy/service/CheckService.java" />
         <option value="$PROJECT_DIR$/src/cn/sy/zkem/SensorEvents.java" />
-        <option value="$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/cn/sy/util/IocUtils.java" />
-        <option value="$PROJECT_DIR$/src/cn/sy/view/sample.fxml" />
-        <option value="$PROJECT_DIR$/src/cn/sy/view/Main.java" />
         <option value="$PROJECT_DIR$/res/zkem-info.properties" />
         <option value="$PROJECT_DIR$/src/cn/sy/util/PropertiesUtil.java" />
-        <option value="$PROJECT_DIR$/res/datasource.js" />
         <option value="$PROJECT_DIR$/res/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/cn/sy/util/TaskUtil.java" />
+        <option value="$PROJECT_DIR$/src/cn/sy/view/Main.java" />
+        <option value="$PROJECT_DIR$/src/cn/sy/view/sample.fxml" />
+        <option value="$PROJECT_DIR$/src/cn/sy/util/AlertUtil.java" />
+        <option value="$PROJECT_DIR$/src/cn/sy/util/DateUtil.java" />
+        <option value="$PROJECT_DIR$/src/cn/sy/util/PingUtil.java" />
+        <option value="$PROJECT_DIR$/res/datasource.js" />
+        <option value="$PROJECT_DIR$/src/cn/sy/util/IocUtils.java" />
+        <option value="$PROJECT_DIR$/src/cn/sy/service/CheckService.java" />
+        <option value="$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java" />
         <option value="$PROJECT_DIR$/src/cn/sy/view/Controller.java" />
       </list>
     </option>
@@ -200,14 +203,11 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="127" />
-    <option name="y" value="46" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1087" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -220,47 +220,47 @@
         <subPane>
           <expand>
             <path>
-              <item name="Check" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Check" type="462c0819:PsiDirectoryNode" />
+              <item name="check" type="b2602c69:ProjectViewProjectNode" />
+              <item name="check" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Check" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Check" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="check" type="b2602c69:ProjectViewProjectNode" />
+              <item name="check" type="462c0819:PsiDirectoryNode" />
+              <item name="files" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Check" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Check" type="462c0819:PsiDirectoryNode" />
+              <item name="check" type="b2602c69:ProjectViewProjectNode" />
+              <item name="check" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Check" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Check" type="462c0819:PsiDirectoryNode" />
+              <item name="check" type="b2602c69:ProjectViewProjectNode" />
+              <item name="check" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Check" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Check" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="sy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Check" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Check" type="462c0819:PsiDirectoryNode" />
+              <item name="check" type="b2602c69:ProjectViewProjectNode" />
+              <item name="check" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sy" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Check" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Check" type="462c0819:PsiDirectoryNode" />
+              <item name="check" type="b2602c69:ProjectViewProjectNode" />
+              <item name="check" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sy" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Check" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Check" type="462c0819:PsiDirectoryNode" />
+              <item name="check" type="b2602c69:ProjectViewProjectNode" />
+              <item name="check" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="sy" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="check" type="b2602c69:ProjectViewProjectNode" />
+              <item name="check" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sy" type="462c0819:PsiDirectoryNode" />
               <item name="zkem" type="462c0819:PsiDirectoryNode" />
@@ -272,18 +272,18 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="ChangesTree.GroupingKeys" value="directory&#10;module" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="check" />
-    <property name="SearchEverywhereHistoryKey" value="addRecord&#9;PSI&#9;JAVA://cn.sy.service.CheckService#addRecord" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/20180624072313994_easyicon_net_128.ico" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
+    <property name="project.structure.last.edited" value="Facets" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -314,15 +314,17 @@
   </component>
   <component name="RunManager" selected="Application.Main (1)">
     <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HEIGHT" value="0" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="WIDTH" value="0" />
     </configuration>
-    <configuration name="IocUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="cn.sy.util.IocUtils" />
+    <configuration name="CheckService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.sy.service.CheckService" />
       <module name="check" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.sy.util.*" />
+          <option name="PATTERN" value="cn.sy.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -350,6 +352,17 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="cn.sy.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="ZkemSDK" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cn.sy.zkem.ZkemSDK" />
+      <module name="check" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.sy.zkem.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -399,13 +412,15 @@
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Main (1)" />
       <item itemvalue="Application.PropertiesUtil" />
-      <item itemvalue="Application.IocUtils" />
+      <item itemvalue="Application.ZkemSDK" />
+      <item itemvalue="Application.CheckService" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.ZkemSDK" />
+        <item itemvalue="Application.CheckService" />
         <item itemvalue="Application.PropertiesUtil" />
-        <item itemvalue="Application.IocUtils" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -436,6 +451,13 @@
       <workItem from="1530062823804" duration="5400000" />
       <workItem from="1530080642836" duration="5490000" />
       <workItem from="1530089120910" duration="2005000" />
+      <workItem from="1530287182104" duration="2014000" />
+      <workItem from="1530370991312" duration="23627000" />
+      <workItem from="1530432460547" duration="21455000" />
+      <workItem from="1530533070892" duration="8939000" />
+      <workItem from="1530545970380" duration="2397000" />
+      <workItem from="1530803349844" duration="3289000" />
+      <workItem from="1531228667310" duration="494000" />
     </task>
     <task id="LOCAL-00001" summary="s">
       <created>1529857557728</created>
@@ -451,27 +473,39 @@
       <option name="project" value="LOCAL" />
       <updated>1530008012227</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="完善">
+      <created>1530464375206</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1530464375206</updated>
+    </task>
+    <task id="LOCAL-00004" summary="完善">
+      <created>1530809548517</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1530809548517</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109725000" />
+    <option name="totallyTimeSpent" value="172258000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3286004" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="4" />
-      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2545639" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.15828878" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -482,14 +516,14 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.2647059" />
-      <window_info anchor="right" id="Coverage" order="9" side_tool="true" visible="true" weight="0.13697916" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.26524064" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32905984" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -505,7 +539,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="16" />
+      <option name="time" value="50" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -523,67 +557,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="44" column="24" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/model/CheckRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/SensorEvents.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1917">
-          <caret line="85" column="7" selection-start-line="85" selection-start-column="7" selection-end-line="85" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/service/CheckService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="23" column="33" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/log4j.properties" />
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1215">
-          <caret line="45" column="51" lean-forward="true" selection-start-line="45" selection-start-column="51" selection-end-line="45" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/SensorEvents.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1323">
-          <caret line="49" column="13" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="31" column="15" lean-forward="true" selection-start-line="31" selection-start-column="15" selection-end-line="31" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java" />
-    <entry file="file://$PROJECT_DIR$/src/EventThread.java" />
-    <entry file="file://$PROJECT_DIR$/src/ZkemParam.java" />
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/src.zip!/java/util/EventObject.java" />
-    <entry file="jar://$PROJECT_DIR$/lib/nutz-1.r.66.jar!/org/nutz/dao/Dao.class" />
     <entry file="jar://$PROJECT_DIR$/lib/nutz-1.r.66.jar!/org/nutz/dao/impl/NutDao.class" />
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/javafx-src.zip!/javafx/application/Application.java" />
     <entry file="file://$PROJECT_DIR$/src/Main.java" />
@@ -600,32 +573,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md" />
-    <entry file="file://$PROJECT_DIR$/out/production/check/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/out/production/check/zkem-info.properties" />
     <entry file="jar://C:/SoftInstallPath/jdk1.8.0_171.2/javafx-src.zip!/javafx/application/Application.java" />
-    <entry file="jar://C:/SoftInstallPath/jdk1.8.0_102/src.zip!/java/lang/System.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="257" column="31" selection-start-line="257" selection-start-column="31" selection-end-line="257" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/SoftInstallPath/jdk1.8.0_102/javafx-src.zip!/javafx/application/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="222" column="23" selection-start-line="222" selection-start-column="23" selection-end-line="222" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/SoftInstallPath/jdk1.8.0_102/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/SoftInstallPath/jdk1.8.0_102/src.zip!/java/lang/System.java" />
+    <entry file="jar://C:/SoftInstallPath/jdk1.8.0_102/javafx-src.zip!/javafx/application/Application.java" />
+    <entry file="jar://C:/SoftInstallPath/jdk1.8.0_102/jre/lib/rt.jar!/sun/reflect/NativeMethodAccessorImpl.class" />
     <entry file="file://$PROJECT_DIR$/Register_SDK.bat" />
     <entry file="file://$PROJECT_DIR$/isRunAtLogon.bat" />
     <entry file="file://$PROJECT_DIR$/files/sdk/Register_SDK.bat">
@@ -636,69 +588,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/other/isRunAtLogon.bat" />
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/view/sample.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="160" lean-forward="true" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/files/zkem-info.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/PropertiesUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/model/ZkemConf.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="20" column="27" lean-forward="true" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/model/CheckRecord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/IocUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/view/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="19" column="30" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="51" column="38" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/jacob.jar!/com/jacob/com/InvocationProxyAllVariants.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
@@ -706,42 +595,163 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/SensorEvents.java">
+    <entry file="file://$PROJECT_DIR$/res/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="54" column="60" selection-start-line="54" selection-start-column="29" selection-end-line="54" selection-end-column="60" />
+        <state relative-caret-position="81">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cn/sy/service/CheckService.java">
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/model/CheckRecord.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+        <state relative-caret-position="405">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/TaskUtil.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/src.zip!/java/awt/Image.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/src.zip!/java/awt/TrayIcon.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/javafx-src.zip!/javafx/scene/control/Dialog.java" />
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/PathUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/javafx-src.zip!/javafx/scene/control/DatePicker.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/javafx-src.zip!/javafx/scene/control/ComboBoxBase.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/src.zip!/java/time/LocalDate.java" />
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/DateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/src.zip!/java/util/Date.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/javafx-src.zip!/javafx/fxml/FXMLLoader.java" />
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/jre/lib/rt.jar!/sun/misc/Unsafe.class" />
+    <entry file="jar://$PROJECT_DIR$/lib/jacob.jar!/com/jacob/com/Variant.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="427" selection-start-line="427" selection-end-line="427" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/src.zip!/java/util/ArrayList.java" />
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/view/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4">
+          <caret line="23" column="35" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/model/ZkemConf.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <folding>
+            <element signature="e#655#656#0" expanded="true" />
+            <element signature="e#684#685#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_102/javafx-src.zip!/javafx/concurrent/Task.java" />
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/AlertUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="9" column="3" lean-forward="true" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/PropertiesUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="13" column="31" lean-forward="true" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/PingUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/datasource.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+        <state>
+          <caret line="1" column="10" selection-start-line="1" selection-start-column="10" selection-end-line="1" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/log4j.properties">
+    <entry file="jar://$PROJECT_DIR$/lib/nutz-1.r.66.jar!/org/nutz/log/impl/AbstractLog.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+        <state relative-caret-position="220">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/view/sample.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="63" column="40" selection-start-line="63" selection-start-column="40" selection-end-line="63" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files/zkem-info.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/util/IocUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+          <folding>
+            <element signature="e#629#630#0" expanded="true" />
+            <element signature="e#670#671#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/service/CheckService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="56" column="7" selection-start-line="56" selection-start-column="7" selection-end-line="56" selection-end-column="7" />
+          <folding>
+            <element signature="e#666#667#0" expanded="true" />
+            <element signature="e#706#707#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/ZkemSDK.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/sy/zkem/SensorEvents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/sy/view/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="202" lean-forward="true" selection-start-line="202" selection-end-line="202" />
+        <state relative-caret-position="620">
+          <caret line="38" column="9" lean-forward="true" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2207#2208#0" expanded="true" />
-            <element signature="e#2272#2273#0" expanded="true" />
           </folding>
         </state>
       </provider>
