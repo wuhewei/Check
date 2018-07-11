@@ -38,6 +38,8 @@ public class ZkemSDK {
         return result;
     }
 
+
+
     /**
      * 断开考勤机链接
      */
@@ -124,42 +126,16 @@ public class ZkemSDK {
      * 监控考勤机实时事件
      */
     public void regEvent(ZkemConf zkemConf, CheckService checkService) {
-        Variant v0 = new Variant(1);
+        Variant v0 = new Variant(zkemConf.getNumber());
         Variant eventMask = new Variant(65535);
-        zkem.invoke("RegEvent", v0, eventMask).getBoolean();
-
-        Dispatch ob = zkem.getObject();
-        SensorEvents se = new SensorEvents(zkemConf.getIpAddr(), zkemConf, checkService);
-        DispatchEvents de = new DispatchEvents(ob, se);
-
-        log.info("考勤机实时监听中...");
-        Dispatch.call(zkem, "RegEvent", new Variant(1l), new Variant(65535l));
-        STA sta = new STA();
-        sta.doMessagePump();
-        Task sensorTask = new Task<Void>(){
-            @Override
-            protected Void call() throws Exception {
-                Dispatch.call(zkem, "RegEvent", new Variant(1l), new Variant(65535l));
-                STA sta = new STA();
-                sta.doMessagePump();
-                return null;
-            }
-        };
-        new Thread(sensorTask).start();
-       /* new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Dispatch.call(zkem, "RegEvent", new Variant(1l), new Variant(65535l));
-                    STA sta = new STA();
-                    sta.doMessagePump();
-                    System.in.read();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        }).start();*/
-
+        boolean regEvent = zkem.invoke("RegEvent", v0, eventMask).getBoolean();
+        if (regEvent){
+            SensorEvents se = new SensorEvents(zkemConf.getIpAddr(), zkemConf, checkService);
+            DispatchEvents de = new DispatchEvents(zkem.getObject(), se);
+            log.info("考勤机实时监听中...");
+        }else{
+            log.error("注册实时监听事件失败，请重新连接考勤机");
+        }
     }
 
     public static void main(String[] args) {

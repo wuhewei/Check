@@ -45,16 +45,6 @@ public class Controller implements Initializable {
     private TextArea logTextArea;
     @FXML
     private CheckBox CboxRunAtLogon;
-    @FXML
-    private DatePicker dpStartDate;
-    @FXML
-    private DatePicker dpEndDate;
-    @FXML
-    private TableView<CheckRecord> tableView;
-    @FXML
-    private TableColumn<CheckRecord, Integer> colNumber;
-    @FXML
-    private TableColumn<CheckRecord, Date> colCheckTime;
 
     private CheckService checkService = new CheckService();
 
@@ -68,7 +58,6 @@ public class Controller implements Initializable {
      */
     @FXML
     public void conn(ActionEvent event) {
-
         zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=", tfIp.getText())
                 .and("port", "=", tfPort.getText())
                 .and("number", "=", tfNumber.getText()));
@@ -86,7 +75,7 @@ public class Controller implements Initializable {
             PropertiesUtil.setValue("zkem.ipAddr", tfIp.getText());
             PropertiesUtil.setValue("zkem.port", tfPort.getText());
             PropertiesUtil.setValue("zkem.number", tfNumber.getText());
-            sdk.regEvent(zkem, checkService);
+
             Task zkemTask = new Task<Void>(){
                 @Override
                 protected Void call() throws Exception {
@@ -94,9 +83,21 @@ public class Controller implements Initializable {
                     return null;
                 }
             };
-            Thread thread1 = new Thread(zkemTask);
-            thread1.setName("考勤事件");
-            thread1.start();
+            Task sensorTask = new Task<Void>(){
+                @Override
+                protected Void call() throws Exception {
+                    sdk.regEvent(zkem, checkService);
+                    return null;
+                }
+            };
+
+            Thread th1 = new Thread(sensorTask);
+            th1.setName("实时事件");
+            th1.start();
+            Thread th2 = new Thread(zkemTask);
+            th2.setDaemon(true);
+            th2.setName("考勤事件");
+            th2.start();
         } else {
             updateButtonLater(btnCon, "连接", false);
             log.error("连接失败！");
@@ -114,70 +115,8 @@ public class Controller implements Initializable {
         zkem = null;
         btnDisCon.setVisible(false);
         btnCon.setVisible(true);
-    }
-    /**
-     * 查看当天考勤
-     *
-     * @param event
-     */
-    @FXML
-    public void showTodayRecord(ActionEvent event) {
-        if (zkem == null) {
-            AlertUtil.alertInformation("请连接考勤机");
-            return;
-        }
-        ObservableList<CheckRecord> records = FXCollections.observableArrayList();
-        Task searchTask = new Task<Void>(){
-            @Override
-            protected Void call() throws Exception {
-                for(CheckRecord record : checkService.getTodayRecord(sdk, zkem)){
-                    records.add(record);
-                }
-                tableView.refresh();
-                tableView.setItems(records);
-                updateButtonLater(((Button)event.getSource()), "查看今天记录", false);
-                return null;
-            }
-        };
-        new Thread(searchTask).start();
-        updateButtonLater(((Button)event.getSource()), "搜索中...", true);
-    }
-
-    /**
-     * 搜索记录
-     * 条件：根据指定日期
-     *
-     */
-    @FXML
-    public void searchFixedDay(ActionEvent event){
-        if (zkem == null) {
-            AlertUtil.alertInformation("请连接考勤机");
-            return;
-        }
-        LocalDate localStart = dpStartDate.getValue();
-        LocalDate localEnd = dpEndDate.getValue();
-        if(localStart == null || localEnd == null){
-            AlertUtil.alertInformation("请指定日期范围");
-            return;
-        }
-        ObservableList<CheckRecord> records = FXCollections.observableArrayList();
-        Date start = DateUtil.formatYMD(localStart.toString());
-        Date end = DateUtil.formatYMD(localEnd.toString());
-        Task searchTask = new Task<Void>(){
-            @Override
-            protected Void call() throws Exception {
-                for(CheckRecord record : checkService.getFixedDayRecord(sdk, zkem, start, end)){
-                    records.add(record);
-                }
-                tableView.refresh();
-                tableView.setItems(records);
-                updateButtonLater(((Button)event.getSource()), "搜索记录", false);
-                return null;
-            }
-        };
-        new Thread(searchTask).start();
-        updateButtonLater(((Button)event.getSource()), "搜索中...", true);
-
+        Runtime.getRuntime().gc();
+        Runtime.getRuntime().removeShutdownHook(Thread.currentThread());
     }
     private void updateButtonLater(final Button button, final String text, final boolean disable) {
         Platform.runLater(new Runnable() {
@@ -221,34 +160,14 @@ public class Controller implements Initializable {
             tfIp.setText(ipAddr);
             tfPort.setText(port);
             tfNumber.setText(number);
+            bufferedReader.close();
+            in.close();
             if(isRun){
                 this.conn(null);
             }
-            bufferedReader.close();
-            in.close();
         } catch (Exception e) {
             log.info("初始化组件失败", e);
         }
-    }
-
-    /**
-     * 初始化表格绑定数据列
-     *
-     */
-    private void initTableView(){
-        colNumber.setCellValueFactory(new PropertyValueFactory<>("studentNumber"));
-        colCheckTime.setCellValueFactory(new PropertyValueFactory<>("checkTime"));
-        colCheckTime.setCellFactory(column -> {
-            TableCell<CheckRecord, Date> cell = new TableCell<CheckRecord, Date>() {
-                @Override
-                protected void updateItem(Date item, boolean empty) {
-                    if (!empty){
-                        this.setText(DateUtil.format(item));
-                    }
-                }
-            };
-            return cell;
-        });
     }
 
 
@@ -268,7 +187,6 @@ public class Controller implements Initializable {
         System.out.flush();
         dao = IocUtils.getConn();
         initView();
-        initTableView();
     }
 
     /**

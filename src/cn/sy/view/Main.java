@@ -1,19 +1,18 @@
 package cn.sy.view;
 
-import cn.sy.util.AlertUtil;
 import cn.sy.util.PathUtil;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -51,6 +50,12 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image(
                 Main.class.getResourceAsStream("/app.png")));
         primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                System.exit(0);
+            }
+        });
         primaryStage.show();
     }
 

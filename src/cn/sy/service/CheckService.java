@@ -56,6 +56,7 @@ public class CheckService {
      * @param zkem 考勤机Model
      */
     public void addCannotSensorRecord(ZkemSDK zkemSDK, ZkemConf zkem){
+        zkemSDK = new ZkemSDK();
         boolean readGeneralLogData = zkemSDK.readGeneralLogData(zkem.getNumber());
         if (readGeneralLogData){
             List<Map<String, Object>> records = zkemSDK.getGeneralLogData();
