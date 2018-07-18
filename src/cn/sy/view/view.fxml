@@ -7,7 +7,10 @@
     <top>
         <BorderPane prefHeight="83.0" prefWidth="485.0" style="-fx-padding: 30;" BorderPane.alignment="CENTER">
             <right>
-                <CheckBox fx:id="CboxRunAtLogon" mnemonicParsing="false" onAction="#runAtLogon" text="开机运行" />
+                <VBox>
+                    <CheckBox fx:id="CboxRunAtLogon" mnemonicParsing="false" onAction="#runAtLogon" text="开机运行程序" />
+                    <CheckBox fx:id="CboxrecoverRecord" mnemonicParsing="false" onAction="#recoverRecord" text="断电恢复数据" />
+                </VBox>
             </right>
             <left>
                 <AnchorPane maxHeight="55">

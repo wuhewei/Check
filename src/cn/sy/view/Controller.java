@@ -25,6 +25,9 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 
 public class Controller implements Initializable {
@@ -45,6 +48,8 @@ public class Controller implements Initializable {
     private TextArea logTextArea;
     @FXML
     private CheckBox CboxRunAtLogon;
+    @FXML
+    private CheckBox CboxrecoverRecord;
 
     private CheckService checkService = new CheckService();
 
@@ -52,12 +57,14 @@ public class Controller implements Initializable {
     private ZkemConf zkem = null;
     private Dao dao = null;
 
+    private static final CountDownLatch latch = new CountDownLatch(1);//一个工人的协作
+
     /**
      * 连接考勤机
      * @param event
      */
     @FXML
-    public void conn(ActionEvent event) {
+    public void conn(ActionEvent event) throws Exception {
         zkem = dao.fetch(ZkemConf.class, Cnd.where("ip_address", "=", tfIp.getText())
                 .and("port", "=", tfPort.getText())
                 .and("number", "=", tfNumber.getText()));
@@ -75,29 +82,22 @@ public class Controller implements Initializable {
             PropertiesUtil.setValue("zkem.ipAddr", tfIp.getText());
             PropertiesUtil.setValue("zkem.port", tfPort.getText());
             PropertiesUtil.setValue("zkem.number", tfNumber.getText());
+            String isRecover = PropertiesUtil.getValue("zkem.recover");
+            if (Boolean.valueOf(isRecover)){
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        log.info("开始恢复数据");
+                        checkService.addCannotSensorRecord(sdk, zkem);
+                        log.info("恢复数据完成");
+                        sdk.regEvent(zkem, checkService);
+                    }
+                },1000);
+            }else{
+                sdk.regEvent(zkem, checkService);
+            }
 
-            Task zkemTask = new Task<Void>(){
-                @Override
-                protected Void call() throws Exception {
-                    checkService.addCannotSensorRecord(sdk, zkem);
-                    return null;
-                }
-            };
-            Task sensorTask = new Task<Void>(){
-                @Override
-                protected Void call() throws Exception {
-                    sdk.regEvent(zkem, checkService);
-                    return null;
-                }
-            };
-
-            Thread th1 = new Thread(sensorTask);
-            th1.setName("实时事件");
-            th1.start();
-            Thread th2 = new Thread(zkemTask);
-            th2.setDaemon(true);
-            th2.setName("考勤事件");
-            th2.start();
         } else {
             updateButtonLater(btnCon, "连接", false);
             log.error("连接失败！");
@@ -115,8 +115,6 @@ public class Controller implements Initializable {
         zkem = null;
         btnDisCon.setVisible(false);
         btnCon.setVisible(true);
-        Runtime.getRuntime().gc();
-        Runtime.getRuntime().removeShutdownHook(Thread.currentThread());
     }
     private void updateButtonLater(final Button button, final String text, final boolean disable) {
         Platform.runLater(new Runnable() {
@@ -142,6 +140,17 @@ public class Controller implements Initializable {
             log.info("设置失败", e);
         }
     }
+    /**
+     * 恢复断电时数据
+     *
+     * @param event
+     */
+    @FXML
+    public void recoverRecord(ActionEvent event) {
+        boolean isRecover = ((CheckBox) event.getSource()).isSelected();
+        PropertiesUtil.setValue("zkem.recover", String.valueOf(isRecover));
+        log.info((isRecover ? "启动" : "取消") + "断电恢复数据");
+    }
 
     /**
      * 初始化页面组件
@@ -156,7 +165,9 @@ public class Controller implements Initializable {
             String ipAddr = PropertiesUtil.getValue("zkem.ipAddr");
             String port = PropertiesUtil.getValue("zkem.port");
             String number = PropertiesUtil.getValue("zkem.number");
+            String isRecover = PropertiesUtil.getValue("zkem.recover");
             CboxRunAtLogon.setSelected(isRun);
+            CboxrecoverRecord.setSelected(Boolean.valueOf(isRecover));
             tfIp.setText(ipAddr);
             tfPort.setText(port);
             tfNumber.setText(number);

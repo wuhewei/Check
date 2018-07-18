@@ -56,7 +56,6 @@ public class CheckService {
      * @param zkem 考勤机Model
      */
     public void addCannotSensorRecord(ZkemSDK zkemSDK, ZkemConf zkem){
-        zkemSDK = new ZkemSDK();
         boolean readGeneralLogData = zkemSDK.readGeneralLogData(zkem.getNumber());
         if (readGeneralLogData){
             List<Map<String, Object>> records = zkemSDK.getGeneralLogData();
@@ -67,30 +66,27 @@ public class CheckService {
                 if (isGtLastCheckTime(lastRecord, record))
                     list.add(record);
             }
-            Trans.exec(new Atom() {
-                @Override
-                public void run() {
-                    if (list.size() > 0){
-                        dao.fastInsert(list);
-                        log.info("成功恢复" + (lastRecord == null ? "" : (DateUtil.format(lastRecord.getCheckTime()) + "之后的")) + list.size() + "条考勤记录");
-                    }
+            Trans.exec(() -> {
+                if (list.size() > 0) {
+                    dao.fastInsert(list);
+                    log.info("成功恢复" + (lastRecord == null ? "" : (DateUtil.format(lastRecord.getCheckTime()) + "之后的")) + list.size() + "条考勤记录");
                 }
             });
         }
     }
 
-    private CheckRecord getRecord(Integer zkemNumberm, Map<String, Object> m){
+    private CheckRecord getRecord(Integer zkemNumber, Map<String, Object> m){
         CheckRecord record = new CheckRecord();
         Date checkTime = DateUtil.format(m.get("Year") + "-" + m.get("Month") + "-" + m.get("Day") + " " + m.get("Hour") + ":" + m.get("Minute") + ":" + m.get("Second"));
         Integer enrollNumber = Integer.valueOf(m.get("EnrollNumber").toString());
-        record.setZkemNumber(zkemNumberm);
+        record.setZkemNumber(zkemNumber);
         record.setStudentNumber(enrollNumber);
         record.setCheckTime(checkTime);
         return record;
     }
 
     private boolean isGtLastCheckTime(CheckRecord lastRecord, CheckRecord record){
-        return lastRecord == null ? true : record.getCheckTime().after(lastRecord.getCheckTime());
+        return lastRecord == null || record.getCheckTime().after(lastRecord.getCheckTime());
     }
 
     private CheckRecord getLastRecord(int zkemNumber){

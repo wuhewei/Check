@@ -24,7 +24,7 @@ public class ZkemSDK {
 
     private static Log log = Logs.getLog(ZkemSDK.class);
 
-    private static ActiveXComponent zkem = new ActiveXComponent("zkemkeeper.ZKEM.1");
+    private ActiveXComponent zkem = null;
 
     /**
      * 连接考勤机
@@ -34,6 +34,8 @@ public class ZkemSDK {
      * @return
      */
     public boolean connect(String address, int port) {
+        // 防止断开连接重新连接出现的多次监听，只能这样了...
+        zkem = new ActiveXComponent("zkemkeeper.ZKEM.1");
         boolean result = zkem.invoke("Connect_NET", address, port).getBoolean();
         return result;
     }
@@ -51,7 +53,7 @@ public class ZkemSDK {
     /**
      * 读取所有考勤记录到 PC 的内部缓冲区，配合getGeneralLogData使用。
      *
-     * @param machineNumber 机器号
+     * @param machineNumber 机器 号
      * @return
      */
     public boolean readGeneralLogData(Integer machineNumber) {
